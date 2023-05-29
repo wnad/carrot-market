@@ -1,9 +1,6 @@
 package com.carrotmarket.domain;
 
-
-import com.carrotmarket.dto.user.UserDto;
 import lombok.*;
-
 import javax.persistence.*;
 
 @ToString
@@ -45,14 +42,5 @@ public class User {
     @Column(name = "neibor2", nullable = true)
     private Location neighbor2;
 
-    public UserDto.Response toDto() {
-        return UserDto.Response.builder()
-                .profileImg(this.profileImg)
-                .profileNickname(this.profileNickname)
-                .mannerTemperature(this.mannerTemperature)
-                .loginId(this.loginId)
-                .loginPwd(this.loginPwd)
-                .build();
-    }
 
 }
