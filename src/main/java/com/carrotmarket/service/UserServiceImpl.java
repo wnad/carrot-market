@@ -3,6 +3,7 @@ package com.carrotmarket.service;
 import com.carrotmarket.domain.User;
 import com.carrotmarket.dto.CommonResponseDto;
 import com.carrotmarket.dto.user.UserDto;
+import com.carrotmarket.modelmapper.ModelMapperFactory;
 import com.carrotmarket.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,13 +17,13 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final ModelMapperFactory modelMapperFactory;
 
     @Override
     @Transactional
     public CommonResponseDto<Object> saveUser(UserDto.Create userSaveRequestDto) {
 
         User newUser = userSaveRequestDto.toEntity();
-
         userRepository.save(newUser);
 
         return CommonResponseDto.builder()
@@ -33,14 +34,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto.Response findUser(Integer id) {
-        return userRepository.findById(id).orElseThrow().toDto();
+
+        User findUser = userRepository.findById(id).orElseThrow();
+        return modelMapperFactory.getUserModelMapper().map(findUser, UserDto.Response.class);
     }
 
     @Override
     public List<UserDto.Response> findUserList() {
         return userRepository.findAll()
                 .stream()
-                .map(User::toDto)
+                .map(user -> modelMapperFactory.getUserModelMapper().map(user, UserDto.Response.class))
                 .collect(Collectors.toList());
     }
 
