@@ -1,5 +1,6 @@
 package com.carrotmarket.dto.user;
 
+import com.carrotmarket.domain.Location;
 import com.carrotmarket.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -46,9 +47,9 @@ public class UserDto {
 
         private String loginPwd;
 
-        private Long neighbor1;
+        private Location neighbor1;
 
-        private Long neighbor2;
+        private Location neighbor2;
 
         public User toEntity() {
             return User.builder()
@@ -57,6 +58,8 @@ public class UserDto {
                     .mannerTemperature(this.mannerTemperature)
                     .loginId(this.loginId)
                     .loginPwd(this.loginPwd)
+                    .neighbor1(this.neighbor1)
+                    .neighbor2(this.neighbor2)
                     .build();
         }
 

@@ -35,11 +35,15 @@ public class User {
     @Column(name = "login_pwd", nullable = false)
     private String loginPwd;
 
+    @ManyToOne
+    @JoinColumn(name= "id")
     @Column(name = "neibor1", nullable = true)
-    private Long neighbor1;
+    private Location neighbor1;
 
+    @ManyToOne
+    @JoinColumn(name= "id")
     @Column(name = "neibor2", nullable = true)
-    private Long neighbor2;
+    private Location neighbor2;
 
     public UserDto.Response toDto() {
         return UserDto.Response.builder()
