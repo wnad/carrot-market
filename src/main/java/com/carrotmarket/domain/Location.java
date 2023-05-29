@@ -19,9 +19,16 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "do", nullable = false)
     private String doo;
+
+    @Column(name = "si", nullable = false)
     private String si;
+
+    @Column(name = "gu", nullable = false)
     private String gu;
+
+    @Column(name = "dong", nullable = false)
     private String dong;
 
 

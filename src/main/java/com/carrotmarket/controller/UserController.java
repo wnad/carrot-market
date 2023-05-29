@@ -50,7 +50,6 @@ public class UserController {
     public ResponseEntity<CommonResponseDto<Object>> deleteUser(@PathVariable("id") Integer id) {
         log.debug("deleteUser()");
 
-
         CommonResponseDto<Object> responseDto = userService.deleteUserById(id);
 
         return ResponseEntity.ok()
